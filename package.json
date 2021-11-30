@@ -1,0 +1,22 @@
+{
+  "name": "advent-of-code-21",
+  "version": "1.0.0",
+  "description": "Solutions for Advent of Code 2021",
+  "main": "bin/app.js",
+  "scripts": {
+    "build:js": "tsc",
+    "run:js": "tsc && node ./bin/app.js",
+    "run": "ts-node ./src/app.ts",
+    "debug": "tsc && node --inspect=9229 ./bin/app.js"
+  },
+  "keywords": [
+    "typescript",
+    "aoc"
+  ],
+  "author": "Lukas Demetz",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}
