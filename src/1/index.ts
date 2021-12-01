@@ -14,21 +14,17 @@ function calculateValue(
   index: number,
   windowSize: number
 ): number {
-  let sum = 0;
-
-  for (let i = index; i < index + windowSize; i++) {
-    sum += values[i];
-  }
-
-  return sum;
+  return values
+    .slice(index, index + windowSize)
+    .reduce((sum, current) => sum + current);
 }
 
-function calculateIncreases(depth: number[], windowSize: number): number {
+function calculateIncreases(values: number[], windowSize: number): number {
   let increases = 0;
-  let previousValue = calculateValue(depth, 0, windowSize);
+  let previousValue = calculateValue(values, 0, windowSize);
 
-  for (let i = 1; i < depth.length - windowSize + 1; i++) {
-    const currentValue = calculateValue(depth, i, windowSize);
+  for (let i = 1; i < values.length - windowSize + 1; i++) {
+    const currentValue = calculateValue(values, i, windowSize);
 
     if (currentValue > previousValue) {
       increases++;
