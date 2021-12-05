@@ -4,8 +4,11 @@ const filename = './input/4.txt';
 
 export async function main() {
   const input = (await readFileFromInput(filename)).split('\r\n\r\n');
-  const numbers = input[0].split(',').map((number) => parseInt(number));
-  const boards = input.slice(1).map((board) =>
+  const numbers = input
+    .shift()
+    .split(',')
+    .map((number) => parseInt(number));
+  const boards = input.map((board) =>
     board.split('\r\n').map((line) =>
       line
         .trim()
@@ -17,13 +20,13 @@ export async function main() {
   );
 
   const winningBoards = getBoardsInWinningOrder(boards, numbers);
-  const firstBoard = winningBoards[0];
+  const firstBoard = winningBoards.shift();
   console.log(
     'Part 1:',
     getSumOfNumbersNotDrawn(firstBoard.board) * firstBoard.lastNumber
   );
 
-  const lastBoard = winningBoards[winningBoards.length - 1];
+  const lastBoard = winningBoards.pop();
   console.log(
     'Part 2:',
     getSumOfNumbersNotDrawn(lastBoard.board) * lastBoard.lastNumber
