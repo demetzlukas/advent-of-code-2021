@@ -12,7 +12,8 @@
     "strictNullChecks": false,
     "skipLibCheck": true,
     "sourceMap": true,
-    "removeComments": true
+    "removeComments": true,
+    "downlevelIteration": true
   },
   "include": ["./**/*.ts"]
 }
