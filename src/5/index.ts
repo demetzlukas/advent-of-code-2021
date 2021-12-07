@@ -41,6 +41,5 @@ function calculateCrossings(valves: number[][], diagonales = false): number {
     }
   }
 
-  return Array.from(crossings.values()).filter((crossing) => crossing > 1)
-    .length;
+  return [...crossings.values()].filter((crossing) => crossing > 1).length;
 }

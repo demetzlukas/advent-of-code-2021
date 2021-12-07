@@ -1,4 +1,5 @@
 import { readFileFromInput } from '../utils/readFile';
+import { range } from 'lodash';
 
 const filename = './input/7.txt';
 
@@ -15,17 +16,17 @@ function calculateNeededFuel(
   positions: number[],
   increasingFuel = false
 ): number {
-  const maxPosition = positions.reduce((max, v) => (v > max ? v : max));
+  const maxPosition = positions.reduce((max, v) => Math.max(max, v));
 
   const fuels: number[] = [];
-  for (const possiblePosition of [...Array(maxPosition + 1).keys()]) {
+  range(maxPosition + 1).forEach((possiblePosition) => {
     let sumOfChanges = 0;
     positions.forEach((position) => {
       const changes = Math.abs(possiblePosition - position);
       sumOfChanges += increasingFuel ? (changes * (changes + 1)) / 2 : changes;
     });
     fuels.push(sumOfChanges);
-  }
+  });
 
-  return fuels.reduce((min, value) => (value < min ? value : min));
+  return fuels.reduce((min, value) => Math.min(min, value));
 }

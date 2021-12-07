@@ -1,4 +1,5 @@
 import { readFileFromInput } from '../utils/readFile';
+import { range } from 'lodash';
 
 const filename = './input/6.txt';
 
@@ -16,7 +17,7 @@ function getNumberOfFishAfterDays(input: number[], days: number): number {
 
   input.forEach((value) => states[value]++);
 
-  for (const _ of [...Array(days).keys()]) {
+  for (const _ of range(days)) {
     let newStates: number[] = [];
 
     for (let i = 8; i > 0; i--) {

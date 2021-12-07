@@ -1,4 +1,5 @@
 import { readLinesFromInput } from '../utils/readFile';
+import { range } from 'lodash';
 
 const filename = './input/3.txt';
 
@@ -8,7 +9,7 @@ export async function main() {
   let epsilon = '';
   let gamma = '';
 
-  for (let index = 0; index < input[0].length; index++) {
+  for (const index of range(input[0].length)) {
     let counter = 0;
 
     for (const line of input) {
@@ -37,7 +38,7 @@ function calculateValue(
 ): number {
   let result = input;
 
-  for (let index = 0; index < result[0].length; index++) {
+  for (const index of range(result[0].length)) {
     let counter = 0;
 
     for (const line of result) {
