@@ -16,7 +16,7 @@ function calculateNeededFuel(
   positions: number[],
   increasingFuel = false
 ): number {
-  const maxPosition = positions.reduce((max, v) => Math.max(max, v));
+  const maxPosition = Math.max(...positions);
 
   const fuels: number[] = [];
   range(maxPosition + 1).forEach((possiblePosition) => {
@@ -28,5 +28,5 @@ function calculateNeededFuel(
     fuels.push(sumOfChanges);
   });
 
-  return fuels.reduce((min, value) => Math.min(min, value));
+  return Math.min(...fuels);
 }
