@@ -3,16 +3,15 @@ import { readLinesFromInput } from '../utils/readFile';
 const filename = './input/8.txt';
 
 export async function main() {
-  const lines = await (
-    await readLinesFromInput(filename)
-  ).map((line) => line.split(' | '));
+  const lines = (await readLinesFromInput(filename)).map((line) =>
+    line.split(' | ')
+  );
 
   const lengths = [2, 4, 3, 7];
 
   let counter = lines
-    .map((line) => line[1])
     .map(
-      (output) =>
+      ([_, output]) =>
         output.split(' ').filter((number) => lengths.includes(number.length))
           .length
     )
