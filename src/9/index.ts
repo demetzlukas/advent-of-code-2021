@@ -59,12 +59,10 @@ function getValuesInBasin(
   column: number,
   included: Set<string>
 ): Set<string> {
-  const value = field[row][column];
-  const neighbors = getAdjacentIndices(field, row, column);
-
-  neighbors
+  getAdjacentIndices(field, row, column)
     .filter(
-      ([row, column]) => field[row][column] !== 9 && field[row][column] > value
+      ([row, column]) =>
+        field[row][column] !== 9 && !included.has(`${row}-${column}`)
     )
     .forEach(([row, column]) =>
       getValuesInBasin(field, row, column, included.add(`${row}-${column}`))
