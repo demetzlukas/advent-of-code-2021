@@ -1,3 +1,3 @@
-import { main } from './8';
+import { main } from './9';
 
 main();
