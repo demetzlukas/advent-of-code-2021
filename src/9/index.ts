@@ -40,12 +40,11 @@ function getBasins(field: number[][]): number[][] {
   const basins: number[][] = [];
   field.forEach((row, rowIndex) => {
     row.forEach((value, columnIndex) => {
-      const neighbors = getAdjacentIndices(field, rowIndex, columnIndex);
-      const counter = neighbors.filter(
-        ([row, column]) => value < field[row][column]
-      ).length;
-
-      if (counter === neighbors.length) {
+      if (
+        getAdjacentIndices(field, rowIndex, columnIndex).every(
+          ([row, column]) => value < field[row][column]
+        )
+      ) {
         basins.push([rowIndex, columnIndex]);
       }
     });
