@@ -84,12 +84,8 @@ function getAdjacentIndices(
   ];
 
   return indices
+    .map(([x, y]) => [row + x, column + y])
     .filter(
-      ([dx, dy]) =>
-        row + dx > -1 &&
-        row + dx < field.length &&
-        column + dy > -1 &&
-        column + dy < field[row].length
-    )
-    .map(([dx, dy]) => [row + dx, column + dy]);
+      ([x, y]) => x > -1 && x < field.length && y > -1 && y < field[row].length
+    );
 }
