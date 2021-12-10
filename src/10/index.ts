@@ -70,7 +70,7 @@ function getPointsPart1(character: string): number {
       return 25137;
   }
 
-  throw new Error('Wrong character ' + character);
+  throw new Error(`Wrong character ${character}`);
 }
 
 function getPointsPart2(character: string): number {
@@ -85,5 +85,5 @@ function getPointsPart2(character: string): number {
       return 4;
   }
 
-  throw new Error('Wrong character ' + character);
+  throw new Error(`Wrong character ${character}`);
 }
