@@ -1,4 +1,3 @@
-import { sum } from 'lodash';
 import { readLinesFromInput } from '../utils/readFile';
 
 const filename = './input/10.txt';
