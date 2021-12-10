@@ -25,10 +25,10 @@ export async function main() {
     let illegalLine = false;
     for (const character of row) {
       if (opening.includes(character)) {
-        stack.push(character);
+        stack.push(parentheses.get(character));
       } else if (closing.includes(character)) {
         const top = stack.pop();
-        if (character !== parentheses.get(top)) {
+        if (character !== top) {
           firstIllegalParentheses.push(character);
           illegalLine = true;
           break;
@@ -51,7 +51,6 @@ export async function main() {
     .map((stack) => stack.reverse())
     .map((stack) =>
       stack
-        .map((c) => parentheses.get(c))
         .map((c) => getPointsPart2(c))
         .reduce((total, value) => total * 5 + value)
     )
