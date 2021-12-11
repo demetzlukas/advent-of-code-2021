@@ -3,11 +3,12 @@ import { readLinesFromInput } from '../utils/readFile';
 const filename = './input/10.txt';
 
 export async function main() {
-  const parentheses = new Map<string, string>();
-  parentheses.set('(', ')');
-  parentheses.set('[', ']');
-  parentheses.set('{', '}');
-  parentheses.set('<', '>');
+  const parentheses = new Map<string, string>([
+    ['(', ')'],
+    ['[', ']'],
+    ['{', '}'],
+    ['<', '>'],
+  ]);
 
   const closing = [...parentheses.values()];
   const opening = [...parentheses.keys()];
