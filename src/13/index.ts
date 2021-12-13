@@ -6,17 +6,18 @@ const filename = './input/13.txt';
 export async function main() {
   const parts = (await readFileFromInput(filename)).split('\r\n\r\n');
   let dots = parts[0].split('\r\n');
-  const foldInstructions = parts[1]
+  const foldInstructions: [string, number][] = parts[1]
     .split('\r\n')
-    .map((line) => line.split(' ').pop().split('='));
+    .map((line) => /.* (x|y)=(\d+)/.exec(line))
+    .map(([_, axis, line]) => [axis, parseInt(line)]);
 
   const [axis, line] = foldInstructions.shift();
-  dots = fold(axis, parseInt(line), dots);
+  dots = fold(axis, line, dots);
 
   console.log('Part 1:', dots.length);
 
   foldInstructions.forEach(([axis, line]) => {
-    dots = fold(axis, parseInt(line), dots);
+    dots = fold(axis, line, dots);
   });
 
   console.log('Part 2:');
