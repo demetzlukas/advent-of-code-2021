@@ -67,7 +67,7 @@ function printDots(coordinates: string[]) {
   range(maxY + 1).forEach((row) => {
     let line = '';
     range(maxX + 1).forEach((column) => {
-      line += coordinates.includes(`${column},${row}`) ? '#' : '.';
+      line += coordinates.includes(`${column},${row}`) ? '#' : ' ';
     });
     console.log(line);
   });
