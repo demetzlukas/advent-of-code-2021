@@ -16,9 +16,7 @@ export async function main() {
 
   console.log('Part 1:', dots.length);
 
-  foldInstructions.forEach(([axis, line]) => {
-    dots = fold(axis, line, dots);
-  });
+  foldInstructions.forEach(([axis, line]) => (dots = fold(axis, line, dots)));
 
   console.log('Part 2:');
   printDots(dots);
