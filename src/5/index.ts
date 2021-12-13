@@ -4,10 +4,10 @@ const filename = './input/5.txt';
 
 export async function main() {
   const valves = (await readLinesFromInput(filename)).map((row) =>
-    row
-      .split(' -> ')
-      .map((p) => p.split(',').map((x) => parseInt(x)))
-      .flat()
+    /(\d+),(\d+) -> (\d+),(\d+)/
+      .exec(row)
+      .slice(1)
+      .map((value) => parseInt(value))
   );
 
   console.log('Part 1:', calculateCrossings(valves));
