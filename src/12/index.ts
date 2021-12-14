@@ -48,7 +48,7 @@ function findPath(
 }
 
 function addNeighbor(from: string, to: string, map: Map<string, string[]>) {
-  const neighbors = map.has(from) ? map.get(from) : [];
+  const neighbors = map.get(from) ?? [];
   neighbors.push(to);
   map.set(from, neighbors);
 }
