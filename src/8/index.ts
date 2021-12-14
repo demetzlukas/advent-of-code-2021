@@ -93,9 +93,7 @@ function intersectInputs(first: string, second: string): string {
 }
 
 function containsInputs(number: string, inputs: string): boolean {
-  return (
-    inputs.split('').filter((input) => !number.includes(input)).length === 0
-  );
+  return inputs.split('').every((input) => number.includes(input));
 }
 
 function getNumberForInputs(number: string, digitAsInputs: string[]): string {
