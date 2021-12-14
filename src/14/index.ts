@@ -7,7 +7,12 @@ export async function main() {
   let [polymer, rulesPart] = (await readFileFromInput(filename)).split(
     '\r\n\r\n'
   );
-  const rules = rulesPart.split('\r\n').map((line) => line.split(' -> '));
+  const rules: Map<string, string> = new Map(
+    rulesPart
+      .split('\r\n')
+      .map((line) => line.split(' -> '))
+      .map(([pair, insert]) => [pair, insert])
+  );
 
   const occurrences = initOccurrences(polymer);
   let pairs = initPolymerPairs(polymer);
@@ -47,26 +52,18 @@ function initOccurrences(polymer: string): Map<string, number> {
 
 function step(
   pairs: Map<string, number>,
-  rules: string[][],
+  rules: Map<string, string>,
   occurrences: Map<string, number>
 ): Map<string, number> {
   const next: Map<string, number> = new Map();
 
   pairs.forEach((occurrence, pair) => {
-    for (const [rulePair, insert] of rules) {
-      if (pair === rulePair) {
-        const [first, second] = pair.split('');
+    const insert = rules.get(pair);
+    const [first, second] = pair.split('');
 
-        next.set(first + insert, occurrence + (next.get(first + insert) ?? 0));
-        next.set(
-          insert + second,
-          occurrence + (next.get(insert + second) ?? 0)
-        );
-
-        occurrences.set(insert, occurrence + (occurrences.get(insert) ?? 0));
-        break;
-      }
-    }
+    next.set(first + insert, occurrence + (next.get(first + insert) ?? 0));
+    next.set(insert + second, occurrence + (next.get(insert + second) ?? 0));
+    occurrences.set(insert, occurrence + (occurrences.get(insert) ?? 0));
   });
 
   return next;
