@@ -25,9 +25,7 @@ export async function main() {
 }
 
 function calculateValue(occurrences: Map<string, number>): number {
-  const sorted = [...occurrences.values()].sort((a, b) => a - b);
-
-  return sorted[sorted.length - 1] - sorted[0];
+  return Math.max(...occurrences.values()) - Math.min(...occurrences.values());
 }
 
 function initPolymerPairs(polymer: string): Map<string, number> {
