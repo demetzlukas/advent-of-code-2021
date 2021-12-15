@@ -30,19 +30,12 @@ function increaseMap(map: number[][], length: number, height: number) {
 }
 
 function getRiskLevel(map: number[][], row = 0, column = 0): number {
-  return (
-    findPaths(map).get(getKey(map.length - 1, map[0].length - 1)) -
-    map[row][column]
-  );
+  return findPaths(map).get(getKey(map.length - 1, map[0].length - 1));
 }
 
 function findPaths(map: number[][], row = 0, column = 0): Map<String, number> {
-  const costs: Map<string, number> = new Map([
-    [getKey(row, column), map[row][column]],
-  ]);
-  let nodes: [cost: number, row: number, colum: number][] = [
-    [map[row][column], row, column],
-  ];
+  const costs: Map<string, number> = new Map([[getKey(row, column), 0]]);
+  let nodes: [cost: number, row: number, colum: number][] = [[0, row, column]];
 
   while (nodes.length > 0) {
     const [cost, row, column] = nodes.shift();
