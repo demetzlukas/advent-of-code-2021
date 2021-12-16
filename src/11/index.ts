@@ -25,7 +25,7 @@ export async function main() {
 }
 
 function step(energyLevels: number[][]): number {
-  const flashed = [];
+  const flashed: string[] = [];
 
   energyLevels.forEach((row, rowIndex) => {
     row.forEach((_, columnIndex) => {
