@@ -52,7 +52,7 @@ function hitsTargetArea(
     if (x >= xMin && x <= xMax && y >= yMin && y <= yMax) {
       return true;
     }
-    if (x > xMax || (y < yMax && xVelocity === 0)) {
+    if (x > xMax || (y < yMin && xVelocity === 0)) {
       return false;
     }
   }
