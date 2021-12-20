@@ -97,21 +97,23 @@ function explode(line: string): [changed: boolean, line: string] {
 }
 
 function addToNumberAfter(string: string, number: string): string {
-  return replaceNumber(string, number, getNumberAfter);
+  return addToNumber(string, number, getNumberAfter);
 }
 
 function addToNumberBefore(string: string, number: string): string {
-  return replaceNumber(string, number, getNumberBefore);
+  return addToNumber(string, number, getNumberBefore);
 }
 
-function replaceNumber(
+function addToNumber(
   string: string,
   number: string,
-  getFunction: (_: string) => [number, string, string]
+  getParts: (
+    _: string
+  ) => [number: number, partBefore: string, partAfter: string]
 ): string {
-  const before = getFunction(string);
-  if (before) {
-    return before[1] + (parseInt(number) + before[0]) + before[2];
+  const parts = getParts(string);
+  if (parts) {
+    return parts[1] + (parseInt(number) + parts[0]) + parts[2];
   }
 
   return string;
@@ -149,38 +151,21 @@ function getMagnitude(line: string): number {
 function getNumberBefore(
   line: string
 ): [number: number, stringBeforeNumber: string, stringAfterNumber: string] {
-  let number = '';
-  let found = false;
-  let lastIndex = -1;
-  for (let i = line.length - 1; i > -1; i--) {
-    if (line[i].match(/\d/)) {
-      if (lastIndex === -1) {
-        lastIndex = i + 1;
-      }
-      found = true;
-      number = line[i] + number;
-    } else if (found) {
-      return [parseInt(number), line.slice(0, i + 1), line.slice(lastIndex)];
-    }
-  }
+  return getNumber(line, /(.*[\[\],])(\d+)(.*)/);
 }
 
 function getNumberAfter(
   line: string
 ): [number: number, stringBeforeNumber: string, stringAfterNumber: string] {
-  let number = '';
-  let found = false;
-  let lastIndex = -1;
+  return getNumber(line, /(.*?[\[\],])(\d+)([\[\],].*)/);
+}
 
-  for (let i = 0; i < line.length; i++) {
-    if (line[i].match(/\d/)) {
-      if (lastIndex === -1) {
-        lastIndex = i - 1;
-      }
-      found = true;
-      number += line[i];
-    } else if (found) {
-      return [parseInt(number), line.slice(0, lastIndex + 1), line.slice(i)];
-    }
+function getNumber(
+  line: string,
+  regex: RegExp
+): [number: number, stringBeforeNumber: string, stringAfterNumber: string] {
+  const parts = regex.exec(line);
+  if (parts) {
+    return [parseInt(parts[2]), parts[1], parts[3]];
   }
 }
