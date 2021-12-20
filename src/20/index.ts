@@ -11,12 +11,12 @@ export async function main() {
       .flatMap((row, i) => row.split('').map((cell, j) => [getKey(i, j), cell]))
   );
 
-  let minIndex = -1;
-  let maxIndex = input[1].split('\r\n').length + 1;
+  let minIndex = 0;
+  let maxIndex = input[1].split('\r\n').length;
   const rounds = 50;
 
   for (let round = 0; round < rounds; round++) {
-    image = enhanceImage(minIndex--, maxIndex++, image, round, algorithm);
+    image = enhanceImage(--minIndex, ++maxIndex, image, round, algorithm);
     if (round === 1) {
       console.log('Part 1:', getNumberOfLitPixels(image));
     }
@@ -38,8 +38,12 @@ function enhanceImage(
 
       for (const [x, y] of geAdjacentIndices(row, column)) {
         if (!image.has(getKey(x, y))) {
-          binaryDigit +=
-            round % 2 === 0 ? algorithm[algorithm.length - 1] : algorithm[0];
+          if (algorithm[0] === '.') {
+            binaryDigit += '.';
+          } else {
+            binaryDigit +=
+              round % 2 === 0 ? algorithm[algorithm.length - 1] : algorithm[0];
+          }
         } else {
           binaryDigit += image.get(getKey(x, y));
         }
