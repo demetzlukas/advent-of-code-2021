@@ -15,5 +15,5 @@
     "removeComments": true,
     "downlevelIteration": true
   },
-  "include": ["./**/*.ts"]
+  "include": ["./src/**/*.ts"]
 }
